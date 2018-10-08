@@ -405,7 +405,8 @@ class ZipRunIterator(AbstractRunIterator):
             start = min_end
             for i, iterator in enumerate(iterators):
                 if ends[i] == min_end:
-                    starts[i], ends[i], values[i] = next(iterator)
+                    try: starts[i], ends[i], values[i] = next(iterator)
+                    except: ignore_it = 1
 
     def __getitem__(self, index):
         return [i[index] for i in self.range_iterators]
